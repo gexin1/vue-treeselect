@@ -1758,8 +1758,9 @@ export default {
         this.clear()
       }
 
+      const nodeState = this.forest.checkedStateMap[node.id]
       const nextState = this.multiple && !this.flat
-        ? this.forest.checkedStateMap[node.id] === UNCHECKED
+        ? (nodeState === UNCHECKED || nodeState === INDETERMINATE)
         : !this.isSelected(node)
 
       if (nextState) {
@@ -1900,7 +1901,10 @@ export default {
     },
 
     addValue(node) {
-      this.forest.selectedNodeIds.push(node.id)
+      // 防止重复添加选中节点
+      if (!this.forest.selectedNodeIds.includes(node.id)) {
+        this.forest.selectedNodeIds.push(node.id)
+      }
       this.forest.selectedNodeMap[node.id] = true
     },
 
