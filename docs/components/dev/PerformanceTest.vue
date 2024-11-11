@@ -3,11 +3,35 @@
 </template>
 
 <script>
-  import { generateOptions } from '../utils'
-
   export default {
     data: () => ({
-      options: generateOptions(1, 500),
+      options: [
+        {
+          hidden: false,
+          id: 'a',
+          label: 'A',
+          children: [
+            {
+              hidden: true,
+              id: 'd',
+              label: 'D',
+            },
+            {
+              hidden: true,
+              id: 'f',
+              label: 'F',
+            },
+          ],
+        },
+        {
+          hidden: true,
+          id: 'b',
+          label: 'B',
+        },
+      ],
     }),
+    mounted() {
+      console.log(this.options)
+    },
   }
 </script>

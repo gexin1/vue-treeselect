@@ -4,7 +4,8 @@ export const code = str => `<code>${encodeHTML(str)}</code>`
 
 export const strong = str => `<strong>${str}</strong>`
 
-export const link = (target, text = 'here') => `<a href="${target}">${text}</a>`
+export const link = (target, text = 'here') =>
+  `<a href="${target}">${text}</a>`
 
 export const makeNameList = names => {
   names = names.map(code)
@@ -29,12 +30,13 @@ function createArray(len, valueMaker) {
 }
 
 export function generateOptions(maxLevel, itemsPerLevel = maxLevel) {
-  const generate = parentId => createArray(itemsPerLevel, i => {
-    const id = parentId + String.fromCharCode(97 + i)
-    const option = { id, label: id.toUpperCase() }
-    if (id.length < maxLevel) option.children = generate(id)
-    return option
-  })
+  const generate = parentId =>
+    createArray(itemsPerLevel, i => {
+      const id = parentId + String.fromCharCode(97 + i)
+      const option = { id, label: id.toUpperCase(), hidden: true }
+      if (id.length < maxLevel) option.children = generate(id)
+      return option
+    })
 
   return generate('')
 }

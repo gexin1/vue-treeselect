@@ -988,6 +988,7 @@ export default {
         isBranch: false,
         isDisabled: false,
         isNew: false,
+        hidden: false,
         index: [ -1 ],
         level: 0,
         raw,
@@ -1528,6 +1529,7 @@ export default {
           const isLeaf = !isBranch
           const isDisabled = !!node.isDisabled || (!this.flat && !isRootNode && parentNode.isDisabled)
           const isNew = !!node.isNew
+          const hidden = !!node.hidden
           const lowerCased = this.matchKeys.reduce((prev, key) => ({
             ...prev,
             [key]: stringifyOptionPropValue(node[key]).toLocaleLowerCase(),
@@ -1547,6 +1549,7 @@ export default {
           this.$set(normalized, 'nestedSearchLabel', nestedSearchLabel)
           this.$set(normalized, 'isDisabled', isDisabled)
           this.$set(normalized, 'isNew', isNew)
+          this.$set(normalized, 'hidden', hidden)
           this.$set(normalized, 'isMatched', false)
           this.$set(normalized, 'isHighlighted', false)
           this.$set(normalized, 'isBranch', isBranch)
@@ -1757,9 +1760,9 @@ export default {
       if (this.single) {
         this.clear()
       }
-
+      // 如果是中间状态就全选
       const nextState = this.multiple && !this.flat
-        ? this.forest.checkedStateMap[node.id] === UNCHECKED
+        ? (this.forest.checkedStateMap[node.id] === UNCHECKED || this.forest.checkedStateMap[node.id] === INDETERMINATE)
         : !this.isSelected(node)
 
       if (nextState) {
@@ -1900,7 +1903,10 @@ export default {
     },
 
     addValue(node) {
-      this.forest.selectedNodeIds.push(node.id)
+      // 防止重复添加选中节点
+      if (!this.forest.selectedNodeIds.includes(node.id)) {
+        this.forest.selectedNodeIds.push(node.id)
+      }
       this.forest.selectedNodeMap[node.id] = true
     },
 
