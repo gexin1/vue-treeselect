@@ -171,6 +171,9 @@
 .vue-treeselect--disabled .vue-treeselect__single-value {
   position: static;
 }
+.vue-treeselect__multi-value-item-hidden {
+  display: none;
+}
 .vue-treeselect__multi-value-item-container {
   display: inline-block;
   padding-top: 5px;

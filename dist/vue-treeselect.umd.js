@@ -263,11 +263,11 @@ module.exports = toPropertyKey, module.exports.__esModule = true, module.exports
 function _typeof(o) {
   "@babel/helpers - typeof";
 
-  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+  return module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
     return typeof o;
   } : function (o) {
     return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(o);
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _typeof(o);
 }
 module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
@@ -2226,6 +2226,7 @@ var instanceId = 0;
         isBranch: false,
         isDisabled: false,
         isNew: false,
+        isHidden: false,
         index: [-1],
         level: 0,
         raw: raw
@@ -2670,6 +2671,7 @@ var instanceId = 0;
         var isLeaf = !isBranch;
         var isDisabled = !!node.isDisabled || !_this16.flat && !isRootNode && parentNode.isDisabled;
         var isNew = !!node.isNew;
+        var isHidden = !!node.isHidden;
         var lowerCased = _this16.matchKeys.reduce(function (prev, key) {
           return _objectSpread(_objectSpread({}, prev), {}, defineProperty_default()({}, key, stringifyOptionPropValue(node[key]).toLocaleLowerCase()));
         }, {});
@@ -2685,6 +2687,7 @@ var instanceId = 0;
         _this16.$set(normalized, 'nestedSearchLabel', nestedSearchLabel);
         _this16.$set(normalized, 'isDisabled', isDisabled);
         _this16.$set(normalized, 'isNew', isNew);
+        _this16.$set(normalized, 'isHidden', isHidden);
         _this16.$set(normalized, 'isMatched', false);
         _this16.$set(normalized, 'isHighlighted', false);
         _this16.$set(normalized, 'isBranch', isBranch);
@@ -3626,12 +3629,16 @@ Delete_component.options.__file = "src/components/icons/Delete.vue"
       'vue-treeselect__multi-value-item-disabled': node.isDisabled,
       'vue-treeselect__multi-value-item-new': node.isNew
     };
+    var contairClass = {
+      'vue-treeselect__multi-value-item-container': true,
+      'vue-treeselect__multi-value-item-hidden': node.isHidden
+    };
     var customValueLabelRenderer = instance.$scopedSlots['value-label'];
     var labelRenderer = customValueLabelRenderer ? customValueLabelRenderer({
       node: node
     }) : node.label;
     return h("div", {
-      "class": "vue-treeselect__multi-value-item-container"
+      "class": contairClass
     }, [h("div", {
       "class": itemClass,
       on: {
