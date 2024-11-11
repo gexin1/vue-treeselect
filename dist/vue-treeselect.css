@@ -172,7 +172,7 @@
   position: static;
 }
 .vue-treeselect__multi-value-item-hidden {
-  display: none;
+  display: none !important;
 }
 .vue-treeselect__multi-value-item-container {
   display: inline-block;
