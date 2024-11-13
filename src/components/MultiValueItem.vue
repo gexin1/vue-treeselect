@@ -31,7 +31,6 @@
       }
       const contairClass = {
         'vue-treeselect__multi-value-item-container': true,
-        'vue-treeselect__multi-value-item-hidden': node.isHidden,
       }
       const customValueLabelRenderer = instance.$scopedSlots['value-label']
       const labelRenderer = customValueLabelRenderer ? customValueLabelRenderer({ node }) : node.label
