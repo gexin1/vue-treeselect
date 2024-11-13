@@ -1053,7 +1053,6 @@ var instanceId = 0;
         isBranch: false,
         isDisabled: false,
         isNew: false,
-        isHidden: false,
         index: [-1],
         level: 0,
         raw: raw
@@ -1498,7 +1497,6 @@ var instanceId = 0;
         var isLeaf = !isBranch;
         var isDisabled = !!node.isDisabled || !_this16.flat && !isRootNode && parentNode.isDisabled;
         var isNew = !!node.isNew;
-        var isHidden = !!node.isHidden;
         var lowerCased = _this16.matchKeys.reduce(function (prev, key) {
           return _objectSpread(_objectSpread({}, prev), {}, defineProperty_default()({}, key, stringifyOptionPropValue(node[key]).toLocaleLowerCase()));
         }, {});
@@ -1514,7 +1512,6 @@ var instanceId = 0;
         _this16.$set(normalized, 'nestedSearchLabel', nestedSearchLabel);
         _this16.$set(normalized, 'isDisabled', isDisabled);
         _this16.$set(normalized, 'isNew', isNew);
-        _this16.$set(normalized, 'isHidden', isHidden);
         _this16.$set(normalized, 'isMatched', false);
         _this16.$set(normalized, 'isHighlighted', false);
         _this16.$set(normalized, 'isBranch', isBranch);
@@ -2457,8 +2454,7 @@ Delete_component.options.__file = "src/components/icons/Delete.vue"
       'vue-treeselect__multi-value-item-new': node.isNew
     };
     var contairClass = {
-      'vue-treeselect__multi-value-item-container': true,
-      'vue-treeselect__multi-value-item-hidden': node.isHidden
+      'vue-treeselect__multi-value-item-container': true
     };
     var customValueLabelRenderer = instance.$scopedSlots['value-label'];
     var labelRenderer = customValueLabelRenderer ? customValueLabelRenderer({
